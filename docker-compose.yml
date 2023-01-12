@@ -1,0 +1,44 @@
+version: '3.4'
+services:
+  od152:
+    container_name: od152
+    image: odoo:15
+    user: root
+    depends_on:
+      - db152
+    ports:
+      - "10152:10152"
+      - "20152:20152" # live chat
+    tty: true
+    command: --
+    environment:
+      - HOST=db152
+      - USER=odoo
+      - PASSWORD=147258Sa
+    volumes:
+      #- /etc/timezone:/etc/timezone:trt
+      #- /etc/localtime:/etc/localtime:trt
+      # - ./entrypoint.sh:/entrypoint.sh   # if you want to install additional Python packages, uncomment this line!
+      - ./addons:/mnt/extra-addons
+      - ./conf:/etc/odoo
+      - ./log:/var/log/odoo
+      - ./data:/var/lib/odoo
+    restart: always # run as a service
+  db152:
+    container_name: db152
+    image: postgres:latest
+    user: root
+    environment:
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=147258Sa
+      - POSTGRES_DB=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - ./pgsql:/var/lib/postgresql/data
+    ports:
+      - 15232:15232
+    restart: always # run as a service
+
+# networks:
+#   bridge:
+#     driver: bridge
