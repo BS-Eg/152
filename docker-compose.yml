@@ -14,7 +14,7 @@ services:
     environment:
       - HOST=db152
       - USER=odoo
-      - PASSWORD=147258Sa
+      - PASSWORD=Bs@147258
     volumes:
       #- /etc/timezone:/etc/timezone:trt
       #- /etc/localtime:/etc/localtime:trt
@@ -30,7 +30,7 @@ services:
     user: root
     environment:
       - POSTGRES_USER=odoo
-      - POSTGRES_PASSWORD=147258Sa
+      - POSTGRES_PASSWORD=Bs@147258
       - POSTGRES_DB=postgres
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
